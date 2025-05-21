@@ -1,0 +1,37 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:GetStartedApp.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:model="using:GetStartedApp.Models"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="GetStartedApp.Views.LoginView"
+        x:DataType="vm:LoginViewModel">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:LoginViewModel/>
+    </Design.DataContext>
+
+  <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+    <TextBlock Text="TimeWise" HorizontalAlignment="Center" FontSize="40" FontWeight="Bold" Margin="0,0,0,16"/>
+    <TextBox Watermark="Username" Text="{Binding Username, Mode=TwoWay}" Width="200" Margin="0,0,0,10"/>
+    <TextBox Watermark="Password" Text="{Binding Password, Mode=TwoWay}" PasswordChar="*" Width="200" Margin="0,0,0,10" />
+    <Button Command="{Binding LoginCommand}" HorizontalAlignment="Center">Login</Button>
+    <ListBox ItemsSource="{Binding Users}" Width="300"/>
+  </StackPanel>
+
+  <UserControl.DataTemplates>
+    <DataTemplate DataType="model:User">
+      <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto, Auto, Auto, Auto">
+        <TextBlock Grid.Row="0" Text="Name: "/>
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Name}"/>
+        <TextBlock Grid.Row="1" Text="Password: "/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Password}"/>
+        <TextBlock Grid.Row="2" Text="Type: "/>
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Type}"/>
+      </Grid>
+    </DataTemplate>
+  </UserControl.DataTemplates>
+</UserControl>

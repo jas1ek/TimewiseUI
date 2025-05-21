@@ -1,0 +1,39 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:GetStartedApp.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:model="using:GetStartedApp.Models"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="GetStartedApp.Views.NewUserView"
+        x:DataType="vm:NewUserViewModel">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:NewUserViewModel/>
+    </Design.DataContext>
+    
+    <StackPanel Margin="20" Spacing="10" Width="285" HorizontalAlignment="Left">
+        <TextBlock Text="Create new user" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
+        <StackPanel Orientation="Horizontal" Spacing="10">
+            <TextBlock Text="Username:" Width="75" VerticalAlignment="Center"/>
+            <TextBox Watermark="Username" Width="200" Text="{Binding Username}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Spacing="10">
+            <TextBlock Text="Password:" Width="75" VerticalAlignment="Center"/>
+            <TextBox Watermark="Password" Width="200" Text="{Binding Password}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Spacing="10">
+            <TextBlock Text="User Type:" Width="75" VerticalAlignment="Center"/>
+            <ComboBox Width="200" SelectedItem="{Binding UserType}">
+                <ComboBoxItem Content="employee"/>
+                <ComboBoxItem Content="project_manager"/>
+                <ComboBoxItem Content="admin"/>
+            </ComboBox>
+        </StackPanel>
+
+    <Button Content="Register" Width="100" Command="{Binding RegisterUserCommand}" HorizontalAlignment="Center"/>
+</StackPanel>
+
+</UserControl>

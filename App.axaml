@@ -1,0 +1,26 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:GetStartedApp.ViewModels"
+             xmlns:views="using:GetStartedApp.Views"
+             xmlns:local="using:GetStartedApp"
+             x:Class="GetStartedApp.App"
+             RequestedThemeVariant="Default">
+
+    <!-- DataTemplates: map ViewModels to Views -->
+    <Application.DataTemplates>
+        <DataTemplate DataType="vm:LoginViewModel">
+            <views:LoginView />
+        </DataTemplate>
+        <DataTemplate DataType="vm:SecondViewModel">
+            <views:SecondView />
+        </DataTemplate>
+        <DataTemplate DataType="vm:NewUserViewModel">
+            <views:NewUserView />
+        </DataTemplate>
+    </Application.DataTemplates>
+
+    <!-- Global Styles -->
+    <Application.Styles>
+        <FluentTheme />
+    </Application.Styles>
+</Application>

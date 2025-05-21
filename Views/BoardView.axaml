@@ -1,0 +1,66 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="GetStartedApp.Views.BoardView">
+
+  <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="200, *">
+    
+    <!-- Sidebar -->
+    <Border Grid.RowSpan="3" Background="#EEEEEE" Padding="10">
+      <StackPanel Width="200" Spacing="10">
+        <TextBlock Text="TimeWise" FontSize="24" FontWeight="Bold"/>
+        <Button Content="Dashboard"/>
+        <Button Content="Time Logs"/>
+        <Button Content="Tasks"/>
+        <Button Content="Projects"/>
+        <Button Content="Log Out"/>
+      </StackPanel>
+    </Border>
+
+    <!-- Top bar -->
+    <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="10" HorizontalAlignment="Right" Spacing="10">
+      <TextBox Width="200" Watermark="Search"/>
+      <Button Content="Create"/>
+    </StackPanel>
+
+    <!-- Board Content -->
+    <Grid Grid.Row="2" Grid.Column="1" Margin="10" ColumnDefinitions="*,*,*">
+      <!-- TO DO -->
+      <StackPanel Spacing="10">
+        <TextBlock Text="TO DO" FontWeight="Bold" FontSize="16"/>
+        <Border Background="#f4f4f4" Padding="10">
+          <StackPanel>
+            <TextBlock Text="Prepare Client Report" FontWeight="Bold"/>
+            <TextBlock Text="Project 1 • Deadline 13/05/25"/>
+            <TextBlock Text="Time Spent: 2h 30min"/>
+          </StackPanel>
+        </Border>
+      </StackPanel>
+
+      <!-- IN PROGRESS -->
+      <StackPanel Grid.Column="1" Spacing="10">
+        <TextBlock Text="IN PROGRESS" FontWeight="Bold" FontSize="16"/>
+        <Border Background="#f4f4f4" Padding="10">
+          <StackPanel>
+            <TextBlock Text="Write Unit Tests" FontWeight="Bold"/>
+            <TextBlock Text="Project 1 • Deadline 18/05/25"/>
+            <TextBlock Text="Time Spent: 3h 13min"/>
+          </StackPanel>
+        </Border>
+      </StackPanel>
+
+      <!-- DONE -->
+      <StackPanel Grid.Column="2" Spacing="10">
+        <TextBlock Text="DONE" FontWeight="Bold" FontSize="16"/>
+        <Border Background="#f4f4f4" Padding="10">
+          <StackPanel>
+            <TextBlock Text="Fix Login Bug" FontWeight="Bold"/>
+            <TextBlock Text="Project 2 • Deadline 05/05/25"/>
+            <TextBlock Text="Time Spent: 4h 45min"/>
+          </StackPanel>
+        </Border>
+      </StackPanel>
+    </Grid>
+
+  </Grid>
+
+</UserControl>
