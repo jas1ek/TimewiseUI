@@ -2,7 +2,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:GetStartedApp.ViewModels"
              x:Class="GetStartedApp.Views.TasksView"
-
              x:DataType="vm:TasksViewModel"
              Background="#F9FAFB">
 
@@ -15,11 +14,36 @@
                            FontWeight="Bold"
                            Foreground="#1F2937"/>
 
-                <Button Content="🏠 Dashboard" Background="Transparent" Foreground="#1F2937"/>
-                <Button Content="📁 Projects" Background="Transparent" Foreground="#1F2937"/>
-                <Button Content="📝 Tasks" Background="Transparent" Foreground="#3B82F6"/>
-                <Button Content="⏱ Time Logs" Background="Transparent" Foreground="#1F2937"/>
-                <Button Content="← Log Out" Background="Transparent" Foreground="#EF4444" HorizontalAlignment="Left" Margin="0,40,0,0"/>
+                <Button Content="🏠 Dashboard"
+                        Background="Transparent"
+                        Foreground="#1F2937"
+                        Command="{Binding Main.ShowBoardCommand}" />
+
+                <Button Content="📁 Projects"
+                        Background="Transparent"
+                        Foreground="#1F2937"
+                        Command="{Binding Main.ShowProjectsCommand}" />
+
+                <Button Content="📝 Tasks"
+                        Background="Transparent"
+                        Foreground="#3B82F6"
+                        Command="{Binding Main.ShowTasksCommand}" />
+
+                <Button Content="⏱ Time Logs"
+                        Background="Transparent"
+                        Foreground="#1F2937"
+                        Command="{Binding Main.ShowTimeLogsCommand}" />
+
+                <Button Content="📊 Reports"
+                        Background="Transparent"
+                        Foreground="#1F2937"
+                        Command="{Binding Main.ShowReportsCommand}" />
+
+                <Button Content="← Log Out"
+                        Background="Transparent"
+                        Foreground="#EF4444"
+                        HorizontalAlignment="Left"
+                        Margin="0,40,0,0"/>
             </StackPanel>
         </Border>
 
@@ -36,7 +60,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <DockPanel Margin="0,0,0,24" LastChildFill="False">
-                            <!-- Left card (title + description) -->
+                            <!-- Left card -->
                             <Border Background="White" CornerRadius="8" Padding="16" Width="600" Margin="0,0,16,0" BorderBrush="#E5E7EB" BorderThickness="1">
                                 <StackPanel Spacing="8">
                                     <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="16" Foreground="#111827"/>
@@ -44,7 +68,7 @@
                                 </StackPanel>
                             </Border>
 
-                            <!-- Right panel (meta info) -->
+                            <!-- Right card -->
                             <Border Background="#F3F4F6" CornerRadius="8" Padding="16" Width="220" BorderBrush="#E5E7EB" BorderThickness="1">
                                 <StackPanel Spacing="8">
                                     <TextBlock Text="Status: TO DO" FontSize="12" Foreground="#6B7280"/>

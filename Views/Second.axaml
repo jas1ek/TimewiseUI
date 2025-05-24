@@ -19,21 +19,28 @@
 
         <Button Content="🏠 Dashboard"
                 Background="Transparent"
-                Foreground="#3B82F6"/>
+                Foreground="#3B82F6"
+                Command="{Binding Main.ShowBoardCommand}" />
 
         <Button Content="📁 Projects"
                 Background="Transparent"
-                Foreground="#1F2937"/>
+                Foreground="#1F2937"
+                Command="{Binding Main.ShowProjectsCommand}" />
 
         <Button Content="📝 Tasks"
                 Background="Transparent"
                 Foreground="#1F2937"
                 Command="{Binding Main.ShowTasksCommand}" />
 
-
         <Button Content="⏱ Time Logs"
                 Background="Transparent"
-                Foreground="#1F2937"/>
+                Foreground="#1F2937"
+                Command="{Binding Main.ShowTimeLogsCommand}" />
+
+        <Button Content="📊 Reports"
+                Background="Transparent"
+                Foreground="#1F2937"
+                Command="{Binding Main.ShowReportsCommand}" />
 
         <Button Content="← Log Out"
                 Background="Transparent"
