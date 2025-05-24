@@ -1,21 +1,133 @@
 <UserControl xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:GetStartedApp.ViewModels"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:model="using:GetStartedApp.Models"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="GetStartedApp.Views.SecondView"
-        x:DataType="vm:SecondViewModel">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:GetStartedApp.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="GetStartedApp.Views.SecondView"
+             x:DataType="vm:SecondViewModel"
+             Background="#F9F9F9">
 
-    <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:SecondViewModel/>
-    </Design.DataContext>
+  <DockPanel>
+    <!-- Sidebar -->
+    <Border Background="#F1F1F1" Width="200" DockPanel.Dock="Left">
+      <StackPanel Margin="20,20,20,10" Spacing="20">
+        <TextBlock Text="🕒 TimeWise"
+                   FontSize="22"
+                   FontWeight="Bold"
+                   Foreground="#1F2937"/>
 
-  <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-    <TextBlock Text="{Binding Username}" />
-    <TextBlock Text="{Binding Password}" />
-  </StackPanel>
+        <Button Content="🏠 Dashboard"
+                Background="Transparent"
+                Foreground="#3B82F6"/>
+
+        <Button Content="📁 Projects"
+                Background="Transparent"
+                Foreground="#1F2937"/>
+
+        <Button Content="📝 Tasks"
+                Background="Transparent"
+                Foreground="#1F2937"
+                Command="{Binding Main.ShowTasksCommand}" />
+
+
+        <Button Content="⏱ Time Logs"
+                Background="Transparent"
+                Foreground="#1F2937"/>
+
+        <Button Content="← Log Out"
+                Background="Transparent"
+                Foreground="#EF4444"
+                HorizontalAlignment="Left"
+                Margin="0,40,0,0"/>
+      </StackPanel>
+    </Border>
+
+    <!-- Main Board -->
+    <StackPanel Margin="20" Spacing="16">
+      <!-- Top Bar -->
+      <StackPanel Orientation="Horizontal" Spacing="16" VerticalAlignment="Center">
+        <TextBlock Text="Board"
+                   FontSize="28"
+                   FontWeight="Bold"
+                   Foreground="Black"/>
+        <TextBox Width="200" Watermark="🔍 Search"/>
+        <Button Content="Create"
+                Background="#E5E7EB"
+                Foreground="#6B7280"
+                FontWeight="Bold"/>
+      </StackPanel>
+
+      <!-- Three-column Board Content -->
+      <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                    VerticalScrollBarVisibility="Disabled">
+        <ItemsControl ItemsSource="{Binding Columns}">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <StackPanel Orientation="Horizontal" Spacing="24"/>
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <Border Background="#F3F4F6"
+                      CornerRadius="8"
+                      Padding="12"
+                      Width="280">
+                <StackPanel>
+                  <TextBlock Text="{Binding Name}"
+                             FontWeight="Bold"
+                             FontSize="16"
+                             Foreground="#1F2937"
+                             Margin="0,0,0,12"/>
+
+                  <ItemsControl ItemsSource="{Binding Tasks}">
+                    <ItemsControl.ItemTemplate>
+                      <DataTemplate>
+                        <Border Background="White"
+                                CornerRadius="6"
+                                Padding="12"
+                                Margin="0,0,0,16"
+                                BorderBrush="#D1D5DB"
+                                BorderThickness="1">
+                          <StackPanel Spacing="6">
+                            <TextBlock Text="{Binding Title}"
+                                       FontWeight="Bold"
+                                       Foreground="#111827"/>
+                            <Border Background="#E5E7EB"
+                                    CornerRadius="4"
+                                    Padding="4,2"
+                                    HorizontalAlignment="Left">
+                              <TextBlock Text="{Binding Project}"
+                                         FontSize="12"
+                                         FontWeight="Bold"
+                                         Foreground="#111827"/>
+                            </Border>
+                            <TextBlock Text="{Binding TimeSpent}"
+                                       FontSize="12"
+                                       Foreground="#6B7280"/>
+                            <TextBlock Text="{Binding Deadline}"
+                                       FontSize="12"
+                                       Foreground="#6B7280"/>
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                              <TextBlock Text="Assigned by"
+                                         FontSize="12"
+                                         Foreground="#6B7280"/>
+                              <Ellipse Width="16"
+                                       Height="16"
+                                       Fill="#3B82F6"/>
+                            </StackPanel>
+                          </StackPanel>
+                        </Border>
+                      </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                  </ItemsControl>
+                </StackPanel>
+              </Border>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </ScrollViewer>
+    </StackPanel>
+  </DockPanel>
 </UserControl>

@@ -6,7 +6,7 @@
              x:Class="GetStartedApp.App"
              RequestedThemeVariant="Default">
 
-    <!-- DataTemplates: map ViewModels to Views -->
+    <!-- 🔁 ViewModel to View mappings -->
     <Application.DataTemplates>
         <DataTemplate DataType="vm:LoginViewModel">
             <views:LoginView />
@@ -14,12 +14,21 @@
         <DataTemplate DataType="vm:SecondViewModel">
             <views:SecondView />
         </DataTemplate>
-        <DataTemplate DataType="vm:NewUserViewModel">
-            <views:NewUserView />
+        <DataTemplate DataType="vm:TasksViewModel">
+            <views:TasksView />
+        </DataTemplate>
+        <DataTemplate DataType="vm:ProjectsViewModel">
+            <views:ProjectsView />
+        </DataTemplate>
+        <DataTemplate DataType="vm:TimeLogsViewModel">
+            <views:TimeLogsView />
+        </DataTemplate>
+        <DataTemplate DataType="vm:ReportsViewModel">
+            <views:ReportsView />
         </DataTemplate>
     </Application.DataTemplates>
 
-    <!-- Global Styles -->
+    <!-- 🎨 Global styling -->
     <Application.Styles>
         <FluentTheme />
     </Application.Styles>

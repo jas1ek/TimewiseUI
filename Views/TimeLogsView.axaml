@@ -1,0 +1,13 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:GetStartedApp.ViewModels"
+             x:Class="GetStartedApp.Views.TimeLogsView"
+             x:DataType="vm:TimeLogsViewModel">
+  <StackPanel Margin="20">
+    <TextBlock Text="⏱ Time Logs"
+               FontSize="28"
+               FontWeight="Bold"
+               Margin="0,0,0,20"/>
+    <TextBlock Text="This is the Time Logs view" FontSize="16"/>
+  </StackPanel>
+</UserControl>
