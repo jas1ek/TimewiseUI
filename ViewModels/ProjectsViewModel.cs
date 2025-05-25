@@ -7,7 +7,7 @@ namespace GetStartedApp.ViewModels;
 
 public partial class ProjectsViewModel : ViewModelBase
 {
-    public ObservableCollection<ProjectItem> Projects { get; set; } = new();
+    public ObservableCollection<ProjectItem> Projects { get; } = new();
 
     public MainWindowViewModel Main { get; }
 
@@ -22,14 +22,23 @@ public partial class ProjectsViewModel : ViewModelBase
 
     private void LoadMockProjects()
     {
-        Projects.Add(new ProjectItem { Name = "Project Alpha", Description = "Build Alpha features." });
-        Projects.Add(new ProjectItem { Name = "Project Beta", Description = "Test and deploy Beta." });
+        Projects.Add(new ProjectItem
+        {
+            Name = "Project Alpha",
+            Description = "Build Alpha features.",
+            AssignedUsers = new ObservableCollection<string> { "Alice", "Bob" }
+        });
+
+        Projects.Add(new ProjectItem
+        {
+            Name = "Project Beta",
+            Description = "Test and deploy Beta.",
+            AssignedUsers = new ObservableCollection<string> { "Charlie" }
+        });
     }
 
     private void OpenCreateProject()
     {
         Main.CurrentPage = new CreateProjectViewModel(Main);
-
     }
-    
 }

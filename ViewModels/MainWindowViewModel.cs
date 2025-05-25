@@ -13,7 +13,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty]
     private ViewModelBase currentPage;
 
-    public ProjectsViewModel ProjectsViewModel { get; set; }
+    public ProjectsViewModel? ProjectsViewModel { get; set; }
 
     public MainWindowViewModel()
     {

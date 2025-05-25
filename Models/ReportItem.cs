@@ -2,7 +2,8 @@ namespace GetStartedApp.Models;
 
 public class ReportItem
 {
-    public string Title { get; set; }
-    public string Summary { get; set; }
-    public string DateGenerated { get; set; }
+    public string Title { get; set; } = string.Empty;
+    public string Summary { get; set; } = string.Empty;
+    public string DateGenerated { get; set; } = string.Empty;
 }
+
