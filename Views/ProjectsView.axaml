@@ -9,49 +9,49 @@
     <!-- Sidebar -->
     <Border Background="#F1F1F1" Width="200" DockPanel.Dock="Left">
       <StackPanel Margin="20,20,20,10" Spacing="20">
-        <TextBlock Text="🕒 TimeWise"
-                   FontSize="22"
-                   FontWeight="Bold"
-                   Foreground="#1F2937"/>
+        <TextBlock Text="🕒 TimeWise" FontSize="22" FontWeight="Bold" Foreground="#1F2937"/>
 
-        <!-- Navigation Buttons -->
-        <Button Content="🏠 Dashboard"
-                Background="Transparent"
-                Foreground="#1F2937"
-                Command="{Binding Main.ShowBoardCommand}" />
-        <Button Content="📁 Projects"
-                Background="Transparent"
-                Foreground="#3B82F6"
-                Command="{Binding Main.ShowProjectsCommand}" />
-        <Button Content="📝 Tasks"
-                Background="Transparent"
-                Foreground="#1F2937"
-                Command="{Binding Main.ShowTasksCommand}" />
-        <Button Content="⏱ Time Logs"
-                Background="Transparent"
-                Foreground="#1F2937"
-                Command="{Binding Main.ShowTimeLogsCommand}" />
-        <Button Content="📊 Reports"
-                Background="Transparent"
-                Foreground="#1F2937"
-                Command="{Binding Main.ShowReportsCommand}" />
-        <Button Content="← Log Out"
-                Background="Transparent"
-                Foreground="#EF4444"
-                HorizontalAlignment="Left"
-                Margin="0,40,0,0"/>
+        <Button Content="🏠 Dashboard" Background="Transparent" Foreground="#1F2937" Command="{Binding Main.ShowBoardCommand}" />
+        <Button Content="📁 Projects" Background="Transparent" Foreground="#3B82F6" Command="{Binding Main.ShowProjectsCommand}" />
+        <Button Content="📝 Tasks" Background="Transparent" Foreground="#1F2937" Command="{Binding Main.ShowTasksCommand}" />
+        <Button Content="⏱ Time Logs" Background="Transparent" Foreground="#1F2937" Command="{Binding Main.ShowTimeLogsCommand}" />
+        <Button Content="📊 Reports" Background="Transparent" Foreground="#1F2937" Command="{Binding Main.ShowReportsCommand}" />
+        <Button Content="← Log Out" Background="Transparent" Foreground="#EF4444" HorizontalAlignment="Left" Margin="0,40,0,0"/>
       </StackPanel>
     </Border>
 
-    <!-- Main Content -->
+    <!-- Main content -->
     <StackPanel Margin="24" Spacing="16">
-      <TextBlock Text="📁 Projects"
-                 FontSize="28"
-                 FontWeight="Bold"
-                 Foreground="#111827"/>
-      <TextBlock Text="This is the Projects view"
-                 FontSize="16"
-                 Foreground="#374151"/>
+      <!-- Header -->
+      <StackPanel Orientation="Horizontal" Spacing="16" VerticalAlignment="Center">
+        <TextBlock Text="Projects" FontSize="28" FontWeight="Bold" Foreground="#111827"/>
+        <TextBox Width="200" Watermark="🔍 Search"/>
+        <Button Content="Create"
+                Background="#60A5FA"
+                Foreground="White"
+                FontWeight="Bold"
+                Padding="8,4"
+                CornerRadius="4"/>
+      </StackPanel>
+
+      <!-- Projects List -->
+      <ItemsControl ItemsSource="{Binding Projects}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <Border Background="White"
+                    CornerRadius="8"
+                    Padding="16"
+                    Margin="0,12,0,0"
+                    BorderBrush="#E5E7EB"
+                    BorderThickness="1">
+              <StackPanel Spacing="6">
+                <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="16" Foreground="#111827"/>
+                <TextBlock Text="{Binding Description}" FontSize="13" Foreground="#374151" TextWrapping="Wrap"/>
+              </StackPanel>
+            </Border>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
     </StackPanel>
   </DockPanel>
 </UserControl>
