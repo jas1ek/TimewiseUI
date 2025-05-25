@@ -6,18 +6,34 @@ namespace GetStartedApp.ViewModels;
 
 public partial class ReportsViewModel : ViewModelBase
 {
+    public MainWindowViewModel Main { get; }
+
+    public ObservableCollection<TaskItem> Reports { get; set; }
+
     public ReportsViewModel(MainWindowViewModel main)
     {
         Main = main;
 
-        Reports = new ObservableCollection<ReportItem>
+        Reports = new ObservableCollection<TaskItem>
         {
-            new ReportItem { Title = "May Productivity", Summary = "Average work hours: 6.2/day", Date = "2025-05-22" },
-            new ReportItem { Title = "Task Overview", Summary = "Completed 24/30 tasks", Date = "2025-05-22" }
+            new TaskItem
+            {
+                Title = "Weekly summary",
+                Description = "Compiled overall team performance",
+                Project = "Operations",
+                TimeSpent = "2h 30m",
+                Deadline = "13/05/25",
+                AssignedTo = "Eva"
+            },
+            new TaskItem
+            {
+                Title = "Bug tracking report",
+                Description = "List of all unresolved bugs",
+                Project = "QA",
+                TimeSpent = "1h",
+                Deadline = "12/05/25",
+                AssignedTo = "Liam"
+            }
         };
     }
-
-    public MainWindowViewModel Main { get; }
-
-    public ObservableCollection<ReportItem> Reports { get; set; }
 }

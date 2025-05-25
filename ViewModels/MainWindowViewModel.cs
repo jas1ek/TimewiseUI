@@ -6,12 +6,14 @@ using CommunityToolkit.Mvvm.Input;
 namespace GetStartedApp.ViewModels;
 
 /// <summary>
-/// The main ViewModel controlling page navigation.
+/// The main ViewModel controlling page navigation and state.
 /// </summary>
 public partial class MainWindowViewModel : ViewModelBase
 {
     [ObservableProperty]
     private ViewModelBase currentPage;
+
+    public ProjectsViewModel ProjectsViewModel { get; set; }
 
     public MainWindowViewModel()
     {
@@ -20,7 +22,7 @@ public partial class MainWindowViewModel : ViewModelBase
         loginViewModel.LoginSucceeded += OnLoginSucceeded;
         CurrentPage = loginViewModel;
 
-        // Initialize commands for sidebar navigation
+        // Initialize navigation commands
         ShowBoardCommand = new RelayCommand(ShowBoard);
         ShowTasksCommand = new RelayCommand(ShowTasks);
         ShowProjectsCommand = new RelayCommand(ShowProjects);
@@ -28,19 +30,18 @@ public partial class MainWindowViewModel : ViewModelBase
         ShowReportsCommand = new RelayCommand(ShowReports);
     }
 
-    // Public commands for binding to the sidebar
+    // 🔹 Public navigation commands
     public ICommand ShowBoardCommand { get; }
     public ICommand ShowTasksCommand { get; }
     public ICommand ShowProjectsCommand { get; }
     public ICommand ShowTimeLogsCommand { get; }
     public ICommand ShowReportsCommand { get; }
 
-    // Called when login is successful
+    // 🔹 Login success handler
     private void OnLoginSucceeded(string username, string password, string type)
     {
         if (type == "admin" || type == "employee")
         {
-            // Navigate to the board view with context
             CurrentPage = new SecondViewModel(username, password, this);
         }
         else
@@ -49,7 +50,7 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
-    // Navigation methods for each page
+    // 🔹 Navigation methods
     private void ShowBoard()
     {
         CurrentPage = new SecondViewModel("admin", "admin", this);
@@ -60,10 +61,14 @@ public partial class MainWindowViewModel : ViewModelBase
         CurrentPage = new TasksViewModel(this);
     }
 
-    private void ShowProjects()
-    {
-        CurrentPage = new ProjectsViewModel(this);
-    }
+   private void ShowProjects()
+{
+    if (ProjectsViewModel is null)
+        ProjectsViewModel = new ProjectsViewModel(this);
+    
+    CurrentPage = ProjectsViewModel;
+}
+
 
     private void ShowTimeLogs()
     {

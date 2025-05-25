@@ -1,0 +1,48 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:GetStartedApp.ViewModels"
+             x:Class="GetStartedApp.Views.CreateProjectView"
+             x:DataType="vm:CreateProjectViewModel"
+             Background="#F9FAFB">
+
+  <StackPanel Margin="24" Spacing="16">
+    <TextBlock Text="Create Project"
+               FontSize="28"
+               FontWeight="Bold"
+               Foreground="#111827" />
+
+    <TextBox Watermark="Project Name"
+             Text="{Binding ProjectName}" />
+
+    <TextBox Watermark="Description"
+             Text="{Binding ProjectDescription}" />
+
+    <StackPanel Orientation="Horizontal" Spacing="8">
+      <TextBox Width="200"
+               Watermark="Add assignee"
+               Text="{Binding NewAssignee}" />
+      <Button Content="Add" Command="{Binding AddAssigneeCommand}" />
+    </StackPanel>
+
+    <ItemsControl ItemsSource="{Binding AssignedUsers}">
+      <ItemsControl.ItemTemplate>
+        <DataTemplate>
+          <TextBlock Text="{Binding}" FontSize="14" Foreground="#374151"/>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+
+    <StackPanel Orientation="Horizontal" Spacing="12" Margin="0,20,0,0">
+      <Button Content="Save"
+              Command="{Binding SaveCommand}"
+              Background="#10B981"
+              Foreground="White"
+              Padding="8,4"/>
+      <Button Content="Cancel"
+              Command="{Binding CancelCommand}"
+              Background="#E5E7EB"
+              Foreground="#374151"
+              Padding="8,4"/>
+    </StackPanel>
+  </StackPanel>
+</UserControl>

@@ -26,6 +26,10 @@
         <DataTemplate DataType="vm:ReportsViewModel">
             <views:ReportsView />
         </DataTemplate>
+        <DataTemplate DataType="vm:CreateProjectViewModel">
+            <views:CreateProjectView />
+        </DataTemplate>
+
     </Application.DataTemplates>
 
     <!-- 🎨 Global styling -->
