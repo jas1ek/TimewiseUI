@@ -1,99 +1,115 @@
-<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:vm="using:GetStartedApp.ViewModels"
-             x:Class="GetStartedApp.Views.TasksView"
-             x:DataType="vm:TasksViewModel"
-             Background="#F9FAFB">
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:GetStartedApp.ViewModels"
+    xmlns:models="using:GetStartedApp.Models"
+    x:Class="GetStartedApp.Views.TasksView"
+    x:DataType="vm:TasksViewModel"
+    Background="#F9FAFB">
 
-    <DockPanel>
-        <!-- Sidebar -->
-        <Border Background="#F1F1F1" Width="200" DockPanel.Dock="Left">
-            <StackPanel Margin="20,20,20,10" Spacing="20">
-                <TextBlock Text="🕒 TimeWise"
-                           FontSize="22"
-                           FontWeight="Bold"
-                           Foreground="#1F2937"/>
+  <DockPanel>
 
-                <Button Content="🏠 Dashboard"
-                        Background="Transparent"
-                        Foreground="#1F2937"
-                        Command="{Binding Main.ShowBoardCommand}" />
+    <!-- SIDEBAR -->
+    <Border Background="#F1F4F6"
+            Width="200"
+            DockPanel.Dock="Left">
+      <StackPanel Margin="20" Spacing="20">
+        <TextBlock Text="🕒 TimeWise" FontSize="22" FontWeight="Bold" Foreground="#1F2937"/>
+        <Button Content="🏠 Dashboard" Command="{Binding Main.ShowBoardCommand}" Background="Transparent" Foreground="#1F2937"/>
+        <Button Content="📁 Projects"  Command="{Binding Main.ShowProjectsCommand}" Background="Transparent" Foreground="#1F2937"/>
+        <Button Content="📝 Tasks"     Command="{Binding Main.ShowTasksCommand}" Background="Transparent" Foreground="#3B82F6"/>
+        <Button Content="⏱ Time Logs"  Command="{Binding Main.ShowTimeLogsCommand}" Background="Transparent" Foreground="#1F2937"/>
+        <Button Content="📊 Reports"   Command="{Binding Main.ShowReportsCommand}" Background="Transparent" Foreground="#1F2937"/>
+        <Button Content="← Log Out"    Background="Transparent" Foreground="#EF4444" Margin="0,40,0,0"/>
+      </StackPanel>
+    </Border>
 
-                <Button Content="📁 Projects"
-                        Background="Transparent"
-                        Foreground="#1F2937"
-                        Command="{Binding Main.ShowProjectsCommand}" />
+    <!-- MAIN CONTENT -->
+    <StackPanel Margin="24" Spacing="16">
 
-                <Button Content="📝 Tasks"
-                        Background="Transparent"
-                        Foreground="#3B82F6"
-                        Command="{Binding Main.ShowTasksCommand}" />
+      <!-- HEADER: instant Filter & Sort -->
+      <StackPanel Orientation="Horizontal" Spacing="8">
+        <TextBlock Text="Tasks" FontSize="28" FontWeight="Bold" Foreground="#111827"/>
 
-                <Button Content="⏱ Time Logs"
-                        Background="Transparent"
-                        Foreground="#1F2937"
-                        Command="{Binding Main.ShowTimeLogsCommand}" />
+        <ComboBox Width="140"
+                  ItemsSource="{Binding StatusOptions}"
+                  SelectedItem="{Binding SelectedStatusFilter, Mode=TwoWay}"/>
 
-                <Button Content="📊 Reports"
-                        Background="Transparent"
-                        Foreground="#1F2937"
-                        Command="{Binding Main.ShowReportsCommand}" />
+        <ComboBox Width="140"
+                  ItemsSource="{Binding SortOptions}"
+                  SelectedItem="{Binding SelectedSortOption, Mode=TwoWay}"/>
+      </StackPanel>
 
-                <Button Content="← Log Out"
-                        Background="Transparent"
-                        Foreground="#EF4444"
-                        HorizontalAlignment="Left"
-                        Margin="0,40,0,0"/>
-            </StackPanel>
-        </Border>
+      <!-- TASKS LIST -->
+      <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <ItemsControl ItemsSource="{Binding Tasks}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="models:TaskItem">
 
-        <!-- Main content -->
-        <StackPanel Margin="24" Spacing="16">
-            <!-- Title and Search -->
-            <StackPanel Orientation="Horizontal" Spacing="16">
-                <TextBlock Text="Tasks" FontSize="28" FontWeight="Bold" Foreground="#111827"/>
-                <TextBox Width="200" Watermark="🔍 Search"/>
-            </StackPanel>
+              <Border Background="#F3F4F6" CornerRadius="12" Padding="16" Margin="0,8">
+                <Grid ColumnDefinitions="*,Auto">
 
-            <!-- Tasks list -->
-            <ItemsControl ItemsSource="{Binding Tasks}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <DockPanel Margin="0,0,0,24" LastChildFill="False">
-                            <!-- Left card -->
-                            <Border Background="White" CornerRadius="8" Padding="16" Width="600" Margin="0,0,16,0" BorderBrush="#E5E7EB" BorderThickness="1">
-                                <StackPanel Spacing="8">
-                                    <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="16" Foreground="#111827"/>
-                                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap" FontSize="13" Foreground="#374151"/>
-                                </StackPanel>
-                            </Border>
+                  <!-- Left: Title + Description -->
+                  <StackPanel Grid.Column="0" Spacing="8" Margin="0,0,16,0">
+                    <TextBlock Text="{Binding Title}" FontSize="18" FontWeight="Bold" Foreground="#111827"/>
+                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap" FontSize="14" Foreground="#374151"/>
+                  </StackPanel>
 
-                            <!-- Right card -->
-                            <Border Background="#F3F4F6" CornerRadius="8" Padding="16" Width="220" BorderBrush="#E5E7EB" BorderThickness="1">
-                                <StackPanel Spacing="8">
-                                    <TextBlock Text="Status: TO DO" FontSize="12" Foreground="#6B7280"/>
-                                    <TextBlock Text="Time spent: {Binding TimeSpent}" FontSize="12" Foreground="#6B7280"/>
-                                    <TextBlock Text="Deadline: {Binding Deadline}" FontSize="12" Foreground="#6B7280"/>
+                  <!-- Right: Metadata + Actions -->
+                  <StackPanel Grid.Column="1" Spacing="12" Width="200">
 
-                                    <StackPanel Orientation="Horizontal" Spacing="6">
-                                        <TextBlock Text="Assigned:" FontSize="12" Foreground="#6B7280"/>
-                                        <Ellipse Width="16" Height="16" Fill="#EC4899"/>
-                                        <TextBlock Text="{Binding AssignedTo}" FontSize="12" Foreground="#111827"/>
-                                    </StackPanel>
+                    <!-- Status / cycle -->
+                    <TextBlock>
+                      <Run Text="Status: " Foreground="#6B7280"/>
+                      <Run Text="{Binding Status}" FontWeight="Bold" Foreground="#111827"/>
+                    </TextBlock>
+                    <Button Content="Change Status"
+                            Command="{Binding CycleStatusCommand}"
+                            CommandParameter="{Binding}"
+                            Background="#E5E7EB"
+                            CornerRadius="6"
+                            Padding="4,2"/>
 
-                                    <Button Content="Log time"
-                                            Background="#60A5FA"
-                                            Foreground="White"
-                                            FontWeight="Bold"
-                                            HorizontalAlignment="Right"
-                                            Padding="8,4"
-                                            CornerRadius="4"/>
-                                </StackPanel>
-                            </Border>
-                        </DockPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>
-    </DockPanel>
+                    <!-- Time spent -->
+                    <TextBlock>
+                      <Run Text="Time spent: " Foreground="#6B7280"/>
+                      <Run Text="{Binding TimeSpent}" Foreground="#111827"/>
+                    </TextBlock>
+
+                    <!-- Deadline -->
+                    <TextBlock>
+                      <Run Text="Deadline: " Foreground="#6B7280"/>
+                      <Run Text="{Binding Deadline}" Foreground="#111827"/>
+                    </TextBlock>
+
+                    <!-- Assigned to -->
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                      <TextBlock Text="Assigned:" Foreground="#6B7280"/>
+                      <Ellipse Width="12" Height="12" Fill="#EC4899"/>
+                      <TextBlock Text="{Binding AssignedTo}" Foreground="#111827"/>
+                    </StackPanel>
+
+                    <!-- Inline add-time -->
+                    <StackPanel Orientation="Horizontal" Spacing="4" Margin="0,8,0,0">
+                      <TextBox Width="80" Watermark="e.g. 30m" Text="{Binding NewTimeEntry, Mode=TwoWay}"/>
+                      <Button Content="Add time"
+                              Command="{Binding AddTimeCommand}"
+                              CommandParameter="{Binding}"
+                              Background="#60A5FA"
+                              Foreground="White"
+                              CornerRadius="4"
+                              Padding="8,4"/>
+                    </StackPanel>
+
+                  </StackPanel>
+                </Grid>
+              </Border>
+
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </ScrollViewer>
+
+    </StackPanel>
+  </DockPanel>
 </UserControl>

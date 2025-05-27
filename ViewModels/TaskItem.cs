@@ -1,16 +1,45 @@
-namespace GetStartedApp.Models;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 
-public class TaskItem
+namespace GetStartedApp.Models
 {
-    public string Title { get; set; } = "";
-    public string Description { get; set; } = "";
-    public string Project { get; set; } = "";
-    public string TimeSpent { get; set; } = "";
-    public string Deadline { get; set; } = "";
-    public string AssignedTo { get; set; } = "";
+    public partial class TaskItem : ObservableObject
+    {
+        public TaskItem()
+        {
+            StatusOptions = new ObservableCollection<string> { "To Do", "In Progress", "Done" };
+        }
 
-    // 🔵 Optional enhancements for future use:
-    public string Status { get; set; } = "";        // To Do, In Progress, Done
-    public string Priority { get; set; } = "";      // Low, Medium, High
-    public string AvatarUrl { get; set; } = "";     // URL or path to user icon
+        public string Title { get; set; } = string.Empty;
+        public string Project { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+
+        [ObservableProperty]
+        private string timeSpent = string.Empty;
+
+        public string Deadline { get; set; } = string.Empty;
+        public string AssignedTo { get; set; } = string.Empty;
+
+        [ObservableProperty]
+        private string status = "To Do";
+
+        [ObservableProperty]
+        private string newTimeEntry = string.Empty;
+
+        /// <summary>
+        /// Per-task dropdown options for status.
+        /// </summary>
+        public ObservableCollection<string> StatusOptions { get; }
+
+        /// <summary>
+        /// Wired up by the VM so each item can execute AddTime().
+        /// </summary>
+        public ICommand AddTimeCommand { get; set; } = null!;
+
+        /// <summary>
+        /// Wired up by the VM so each item can execute CycleStatus().
+        /// </summary>
+        public ICommand CycleStatusCommand { get; set; } = null!;
+    }
 }

@@ -1,11 +1,12 @@
 using Avalonia.Controls;
 
-namespace GetStartedApp.Views;
-
-public partial class TasksView : UserControl
+namespace GetStartedApp.Views
 {
-    public TasksView()
+    public partial class TasksView : UserControl
     {
-        InitializeComponent();
+        public TasksView()
+        {
+            InitializeComponent();
+        }
     }
 }
