@@ -1,0 +1,58 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\olasl\\Desktop\\TimewiseUI\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BE44927B-CE7C-BD20-CE7C-4810B09EB129}|GetStartedApp.csproj|c:\\users\\olasl\\desktop\\timewiseui\\views\\tasksview.axaml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{BE44927B-CE7C-BD20-CE7C-4810B09EB129}|GetStartedApp.csproj|solutionrelative:views\\tasksview.axaml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BE44927B-CE7C-BD20-CE7C-4810B09EB129}|GetStartedApp.csproj|c:\\users\\olasl\\desktop\\timewiseui\\viewmodels\\tasksviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE44927B-CE7C-BD20-CE7C-4810B09EB129}|GetStartedApp.csproj|solutionrelative:viewmodels\\tasksviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 162,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TasksViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\olasl\\Desktop\\TimewiseUI\\ViewModels\\TasksViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\TasksViewModel.cs",
+              "ToolTip": "C:\\Users\\olasl\\Desktop\\TimewiseUI\\ViewModels\\TasksViewModel.cs",
+              "RelativeToolTip": "ViewModels\\TasksViewModel.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAswKsAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-06T12:45:17.067Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TasksView.axaml",
+              "DocumentMoniker": "C:\\Users\\olasl\\Desktop\\TimewiseUI\\Views\\TasksView.axaml",
+              "RelativeDocumentMoniker": "Views\\TasksView.axaml",
+              "ToolTip": "C:\\Users\\olasl\\Desktop\\TimewiseUI\\Views\\TasksView.axaml",
+              "RelativeToolTip": "Views\\TasksView.axaml",
+              "ViewState": "AgIAAHIAAAAAAAAAAAAAAIQAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-06-06T11:27:47.805Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

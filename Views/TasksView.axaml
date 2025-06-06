@@ -25,6 +25,7 @@
     </Border>
 
     <!-- MAIN CONTENT -->
+	  <ScrollViewer VerticalScrollBarVisibility="Auto">
     <StackPanel Margin="24" Spacing="16">
 
       <!-- HEADER: instant Filter & Sort -->
@@ -40,6 +41,27 @@
                   SelectedItem="{Binding SelectedSortOption, Mode=TwoWay}"/>
       </StackPanel>
 
+		<!-- ADD NEW TASK FORM -->
+		<StackPanel Spacing="8" Margin="0,0,0,16">
+			<TextBlock Text="➕ Add New Task" FontSize="20" FontWeight="Bold" Foreground="#111827"/>
+
+			<StackPanel>
+				<TextBox Watermark="Title" Text="{Binding NewTaskTitle, Mode=TwoWay}" />
+				<TextBox Watermark="Description" Text="{Binding NewTaskDescription, Mode=TwoWay}" />
+				<TextBox Watermark="Project" Text="{Binding NewTaskProject, Mode=TwoWay}" />
+				<TextBox Watermark="Deadline (e.g. 13/06/25)" Text="{Binding NewTaskDeadline, Mode=TwoWay}" />
+				<TextBox Watermark="Assigned To" Text="{Binding NewTaskAssignedTo, Mode=TwoWay}" />
+			</StackPanel>
+
+
+			<Button Content="Add Task"
+					Command="{Binding AddTaskCommand}"
+					Background="#10B981"
+					Foreground="White"
+					Padding="8,4"
+					CornerRadius="6"/>
+		</StackPanel>
+
       <!-- TASKS LIST -->
       <ScrollViewer VerticalScrollBarVisibility="Auto">
         <ItemsControl ItemsSource="{Binding Tasks}">
@@ -50,25 +72,18 @@
                 <Grid ColumnDefinitions="*,Auto">
 
                   <!-- Left: Title + Description -->
-                  <StackPanel Grid.Column="0" Spacing="8" Margin="0,0,16,0">
-                    <TextBlock Text="{Binding Title}" FontSize="18" FontWeight="Bold" Foreground="#111827"/>
-                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap" FontSize="14" Foreground="#374151"/>
-                  </StackPanel>
+					<StackPanel Grid.Column="0" Spacing="8" Margin="0,0,16,0">
+						<TextBox Text="{Binding Title, Mode=TwoWay}" FontSize="18" FontWeight="Bold" Foreground="#111827" Background="White"/>
+						<TextBox Text="{Binding Description, Mode=TwoWay}" TextWrapping="Wrap" FontSize="14" Foreground="#374151" Background="White"/>
+					</StackPanel>
+					
 
                   <!-- Right: Metadata + Actions -->
                   <StackPanel Grid.Column="1" Spacing="12" Width="200">
 
                     <!-- Status / cycle -->
-                    <TextBlock>
-                      <Run Text="Status: " Foreground="#6B7280"/>
-                      <Run Text="{Binding Status}" FontWeight="Bold" Foreground="#111827"/>
-                    </TextBlock>
-                    <Button Content="Change Status"
-                            Command="{Binding CycleStatusCommand}"
-                            CommandParameter="{Binding}"
-                            Background="#E5E7EB"
-                            CornerRadius="6"
-                            Padding="4,2"/>
+					  <ComboBox ItemsSource="{Binding StatusOptions}" SelectedItem="{Binding Status, Mode=TwoWay}" Background="White"/>
+					  
 
                     <!-- Time spent -->
                     <TextBlock>
@@ -77,19 +92,23 @@
                     </TextBlock>
 
                     <!-- Deadline -->
-                    <TextBlock>
-                      <Run Text="Deadline: " Foreground="#6B7280"/>
-                      <Run Text="{Binding Deadline}" Foreground="#111827"/>
-                    </TextBlock>
+					  <StackPanel Orientation="Horizontal" Spacing="6">
+						  <TextBlock Text="Deadline:" Foreground="#6B7280"/>
+						  <TextBox Text="{Binding Deadline, Mode=TwoWay}" Width="100" Background="White"/>
+					  </StackPanel>
+					  
+                    
 
                     <!-- Assigned to -->
-                    <StackPanel Orientation="Horizontal" Spacing="6">
-                      <TextBlock Text="Assigned:" Foreground="#6B7280"/>
-                      <Ellipse Width="12" Height="12" Fill="#EC4899"/>
-                      <TextBlock Text="{Binding AssignedTo}" Foreground="#111827"/>
-                    </StackPanel>
+					  <StackPanel Orientation="Horizontal" Spacing="6">
+						  <TextBlock Text="Assigned:" Foreground="#6B7280"/>
+						  <Ellipse Width="12" Height="12" Fill="#EC4899"/>
+						  <TextBox Text="{Binding AssignedTo, Mode=TwoWay}" Width="100" Background="White"/>
+					  </StackPanel>
+					 
 
-                    <!-- Inline add-time -->
+
+					  <!-- Inline add-time -->
                     <StackPanel Orientation="Horizontal" Spacing="4" Margin="0,8,0,0">
                       <TextBox Width="80" Watermark="e.g. 30m" Text="{Binding NewTimeEntry, Mode=TwoWay}"/>
                       <Button Content="Add time"
@@ -111,5 +130,6 @@
       </ScrollViewer>
 
     </StackPanel>
+	  </ScrollViewer>
   </DockPanel>
 </UserControl>
