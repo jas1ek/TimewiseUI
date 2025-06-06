@@ -19,6 +19,12 @@ namespace GetStartedApp.ViewModels
         [ObservableProperty] private string selectedStatusFilter = "All";
         [ObservableProperty] private string selectedSortOption = "Deadline";
 
+        [ObservableProperty] private string newTaskTitle = string.Empty;
+        [ObservableProperty] private string newTaskDescription = string.Empty;
+        [ObservableProperty] private string newTaskProject = string.Empty;
+        [ObservableProperty] private string newTaskDeadline = string.Empty;
+        [ObservableProperty] private string newTaskAssignedTo = string.Empty;
+
         public ObservableCollection<string> StatusOptions { get; } =
             new ObservableCollection<string> { "All", "To Do", "In Progress", "Done" };
         public ObservableCollection<string> SortOptions { get; } =
@@ -26,6 +32,8 @@ namespace GetStartedApp.ViewModels
 
         public IRelayCommand<TaskItem?> AddTimeCommand     { get; }
         public IRelayCommand<TaskItem?> CycleStatusCommand { get; }
+
+        public IRelayCommand AddTaskCommand { get; }
 
         public TasksViewModel(MainWindowViewModel main)
         {
@@ -61,6 +69,8 @@ namespace GetStartedApp.ViewModels
                     _             => "To Do"
                 };
             });
+
+            AddTaskCommand = new RelayCommand(AddTask);
 
             // wire each item
             foreach (var itm in AllTasks)
@@ -131,6 +141,34 @@ namespace GetStartedApp.ViewModels
             return h > 0
                 ? (m > 0 ? $"{h}h {m}m" : $"{h}h")
                 : $"{m}m";
+        }
+
+        private void AddTask()
+        {
+            if (string.IsNullOrWhiteSpace(NewTaskTitle)) return;
+
+            var newItem = new TaskItem
+            {
+                Title = NewTaskTitle,
+                Description = NewTaskDescription,
+                Project = NewTaskProject,
+                Deadline = NewTaskDeadline,
+                AssignedTo = NewTaskAssignedTo,
+                TimeSpent = "0m",
+                Status = "To Do",
+                AddTimeCommand = AddTimeCommand,
+                CycleStatusCommand = CycleStatusCommand
+            };
+
+            AllTasks.Add(newItem);
+            ApplyFilter(); // refresh the view
+
+            // clear inputs
+            NewTaskTitle = "";
+            NewTaskDescription = "";
+            NewTaskProject = "";
+            NewTaskDeadline = "";
+            NewTaskAssignedTo = "";
         }
     }
 }
