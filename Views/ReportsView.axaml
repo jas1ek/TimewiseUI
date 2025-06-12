@@ -7,7 +7,6 @@
              Background="#F9FAFB">
 
   <DockPanel>
-
     <!-- Sidebar -->
     <Border Background="#F1F1F1" Width="200" DockPanel.Dock="Left">
       <StackPanel Margin="20" Spacing="20">
@@ -59,13 +58,23 @@
                    Foreground="#111827"
                    VerticalAlignment="Center"/>
 
-        <Button Grid.Column="1"
-                Content="Save to File"
-                Background="#3B82F6"
-                Foreground="White"
-                Padding="10,4"
-                CornerRadius="4"
-                Command="{Binding SaveReportsToFileCommand}" />
+        <StackPanel Grid.Column="1" Orientation="Vertical">
+<Button Grid.Column="1"
+        Content="Save to File"
+        Background="#3B82F6"
+        Foreground="White"
+        Padding="10,4"
+        CornerRadius="4"
+        Command="{Binding SaveReportsToFileCommand}" />
+
+          <!-- Popup message -->
+          <TextBlock Text="{Binding SaveStatus}"
+                     Foreground="#10B981"
+                     FontWeight="Bold"
+                     FontSize="14"
+                     Margin="0,8,0,0"
+                     HorizontalAlignment="Right"/>
+        </StackPanel>
       </Grid>
 
       <!-- Reports DataGrid -->

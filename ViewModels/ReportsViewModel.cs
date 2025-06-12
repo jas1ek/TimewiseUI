@@ -1,14 +1,15 @@
 using System;
 using System.Collections.ObjectModel;
-using System.Collections.Generic;
 using System.IO;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GetStartedApp.Models;
+using System.Linq;
 
 namespace GetStartedApp.ViewModels
 {
-    public class ReportsViewModel : ViewModelBase
+    public partial class ReportsViewModel : ViewModelBase
     {
         public MainWindowViewModel Main { get; }
 
@@ -16,47 +17,48 @@ namespace GetStartedApp.ViewModels
 
         public ICommand SaveReportsToFileCommand { get; }
 
-        // Default ctor—empty list
+        [ObservableProperty]
+        private string saveStatus = "";
+
+        // Default constructor—empty list
         public ReportsViewModel(MainWindowViewModel main)
             : this(main, Array.Empty<ReportItem>()) { }
 
-        // Ctor for generated reports
-        public ReportsViewModel(MainWindowViewModel main, IEnumerable<ReportItem> items)
+        // Constructor that accepts generated report items
+        public ReportsViewModel(MainWindowViewModel main, System.Collections.Generic.IEnumerable<ReportItem> items)
         {
             Main = main ?? throw new ArgumentNullException(nameof(main));
             Reports = new ObservableCollection<ReportItem>(items);
-
-            SaveReportsToFileCommand = new RelayCommand(SaveReportsToFile);
+            SaveReportsToFileCommand = new AsyncRelayCommand(SaveReportsToFileAsync);
         }
 
-        private void SaveReportsToFile()
+        private async System.Threading.Tasks.Task SaveReportsToFileAsync()
         {
             try
             {
-                // Prepare file path: e.g. "Reports_2024-06-12_16-25-30.txt"
-                var fileName = $"Reports_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.txt";
-                var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
+                string filename = $"Timewise_Report_{DateTime.Now:yyyyMMdd_HHmmss}.txt";
+                string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), filename);
 
-                using (var writer = new StreamWriter(filePath))
+                using (var sw = new StreamWriter(path))
                 {
-                    writer.WriteLine("===== Reports =====");
-                    foreach (var report in Reports)
+                    foreach (var r in Reports)
                     {
-                        writer.WriteLine($"Title: {report.Title}");
-                        writer.WriteLine($"Summary: {report.Summary}");
-                        writer.WriteLine($"Date Generated: {report.DateGenerated}");
-                        writer.WriteLine(new string('-', 30));
+                        await sw.WriteLineAsync($"Title: {r.Title}");
+                        await sw.WriteLineAsync($"Summary: {r.Summary}");
+                        await sw.WriteLineAsync($"Date Generated: {r.DateGenerated}");
+                        await sw.WriteLineAsync(new string('-', 32));
                     }
                 }
 
-                // Optional: show a message box (Avalonia or log to console)
-                Console.WriteLine($"Report saved to: {filePath}");
+                SaveStatus = $"Saved to {filename}!";
             }
             catch (Exception ex)
             {
-                // Error handling (you can also show a message box in UI)
-                Console.WriteLine("❌ Failed to save report: " + ex.Message);
+                SaveStatus = $"Error: {ex.Message}";
             }
+
+            await System.Threading.Tasks.Task.Delay(2000);
+            SaveStatus = "";
         }
     }
 }
