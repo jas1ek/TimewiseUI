@@ -6,4 +6,3 @@ public class ReportItem
     public string Summary { get; set; } = string.Empty;
     public string DateGenerated { get; set; } = string.Empty;
 }
-

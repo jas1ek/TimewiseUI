@@ -167,6 +167,15 @@
         </dg:DataGrid.Styles>
 
         <dg:DataGrid.Columns>
+          <!-- Selection Checkbox -->
+          <dg:DataGridTemplateColumn Header="" Width="60">
+            <dg:DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"/>
+              </DataTemplate>
+            </dg:DataGridTemplateColumn.CellTemplate>
+          </dg:DataGridTemplateColumn>
+
           <dg:DataGridTemplateColumn Header="User" Width="150">
             <dg:DataGridTemplateColumn.CellTemplate>
               <DataTemplate>
