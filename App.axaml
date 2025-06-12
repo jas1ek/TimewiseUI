@@ -29,11 +29,12 @@
         <DataTemplate DataType="vm:CreateProjectViewModel">
             <views:CreateProjectView />
         </DataTemplate>
-
     </Application.DataTemplates>
 
     <!-- 🎨 Global styling -->
     <Application.Styles>
         <FluentTheme />
+        <!-- Added so DataGrid picks up Fluent styling -->
+        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
     </Application.Styles>
 </Application>

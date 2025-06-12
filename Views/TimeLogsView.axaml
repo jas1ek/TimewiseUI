@@ -1,29 +1,203 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:GetStartedApp.ViewModels"
+             xmlns:dg="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls.DataGrid"
              x:Class="GetStartedApp.Views.TimeLogsView"
              x:DataType="vm:TimeLogsViewModel"
              Background="#F9FAFB">
 
   <DockPanel>
+
     <!-- Sidebar -->
     <Border Background="#F1F1F1" Width="200" DockPanel.Dock="Left">
-      <StackPanel Margin="20,20,20,10" Spacing="20">
-        <TextBlock Text="🕒 TimeWise" FontSize="22" FontWeight="Bold" Foreground="#1F2937"/>
-        <Button Content="🏠 Dashboard" Background="Transparent" Foreground="#1F2937" Command="{Binding Main.ShowBoardCommand}" />
-        <Button Content="📁 Projects" Background="Transparent" Foreground="#1F2937" Command="{Binding Main.ShowProjectsCommand}" />
-        <Button Content="📝 Tasks" Background="Transparent" Foreground="#1F2937" Command="{Binding Main.ShowTasksCommand}" />
-        <Button Content="⏱ Time Logs" Background="Transparent" Foreground="#3B82F6" Command="{Binding Main.ShowTimeLogsCommand}" />
-        <Button Content="📊 Reports" Background="Transparent" Foreground="#1F2937" Command="{Binding Main.ShowReportsCommand}" />
-        <Button Content="← Log Out" Background="Transparent" Foreground="#EF4444" HorizontalAlignment="Left" Margin="0,40,0,0"/>
+      <StackPanel Margin="20" Spacing="20">
+        <TextBlock Text="🕒 TimeWise"
+                   FontSize="22"
+                   FontWeight="Bold"
+                   Foreground="#1F2937"/>
+        <Button Content="🏠 Dashboard"
+                Background="Transparent"
+                Foreground="#1F2937"
+                Command="{Binding Main.ShowBoardCommand}" />
+        <Button Content="📁 Projects"
+                Background="Transparent"
+                Foreground="#1F2937"
+                Command="{Binding Main.ShowProjectsCommand}" />
+        <Button Content="📝 Tasks"
+                Background="Transparent"
+                Foreground="#1F2937"
+                Command="{Binding Main.ShowTasksCommand}" />
+        <Button Content="⏱ Time Logs"
+                Background="Transparent"
+                Foreground="#3B82F6"
+                Command="{Binding Main.ShowTimeLogsCommand}" />
+        <Button Content="📊 Reports"
+                Background="Transparent"
+                Foreground="#1F2937"
+                Command="{Binding Main.ShowReportsCommand}" />
+        <Button Content="← Log Out"
+                Background="Transparent"
+                Foreground="#EF4444"
+                HorizontalAlignment="Left"
+                Margin="0,40,0,0" />
       </StackPanel>
     </Border>
 
     <!-- Main Content -->
     <StackPanel Margin="24" Spacing="16">
-      <TextBlock Text="⏱ Time Logs" FontSize="28" FontWeight="Bold" Foreground="#111827"/>
-      <TextBlock Text="This is the Time Logs view" FontSize="16" Foreground="#374151"/>
+
+      <!-- Header: Title, Search, Apply & Report -->
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition/>
+          <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="⏱ Time Logs"
+                   FontSize="28"
+                   FontWeight="Bold"
+                   Foreground="#111827"
+                   VerticalAlignment="Center"/>
+
+        <StackPanel Grid.Column="1"
+                    Orientation="Horizontal"
+                    Spacing="8"
+                    VerticalAlignment="Center">
+          <!-- Search box -->
+          <Border Background="#E5E7EB" CornerRadius="4">
+            <TextBox Width="200"
+                     Margin="2"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     Watermark="Search…"
+                     Foreground="#374151"
+                     Text="{Binding SearchText, Mode=TwoWay}" />
+          </Border>
+
+          <!-- Apply Filters -->
+          <Button Content="Apply Filters"
+                  Background="#10B981"
+                  Foreground="White"
+                  Padding="10,4"
+                  CornerRadius="4"
+                  Command="{Binding ApplyFiltersCommand}" />
+
+          <!-- Generate Report -->
+          <Button Content="Generate Report"
+                  Background="#3B82F6"
+                  Foreground="White"
+                  Padding="10,4"
+                  CornerRadius="4"
+                  Command="{Binding GenerateReportCommand}" />
+        </StackPanel>
+      </Grid>
+
+      <!-- Filter Panel -->
+      <Border Background="White"
+              CornerRadius="6"
+              Padding="16">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+          </Grid.ColumnDefinitions>
+
+          <!-- Project -->
+          <StackPanel Orientation="Vertical" Margin="0,0,16,0">
+            <TextBlock Text="Project"
+                       FontWeight="Bold"
+                       Foreground="#374151"/>
+            <ComboBox Width="100"
+                      ItemsSource="{Binding ProjectsFilter}"
+                      SelectedItem="{Binding SelectedProjectFilter}" />
+          </StackPanel>
+
+          <!-- Task -->
+          <StackPanel Orientation="Vertical" Grid.Column="1" Margin="0,0,16,0">
+            <TextBlock Text="Task"
+                       FontWeight="Bold"
+                       Foreground="#374151"/>
+            <ComboBox Width="100"
+                      ItemsSource="{Binding TasksFilter}"
+                      SelectedItem="{Binding SelectedTaskFilter}" />
+          </StackPanel>
+
+          <!-- From -->
+          <StackPanel Orientation="Vertical" Grid.Column="2" Margin="0,0,16,0">
+            <TextBlock Text="From"
+                       FontWeight="Bold"
+                       Foreground="#374151"/>
+            <DatePicker Width="120"
+                        SelectedDate="{Binding FromDate, Mode=TwoWay}"
+                        Foreground="#374151" />
+          </StackPanel>
+
+          <!-- To -->
+          <StackPanel Orientation="Vertical" Grid.Column="3" Margin="0,0,16,0">
+            <TextBlock Text="To"
+                       FontWeight="Bold"
+                       Foreground="#374151"/>
+            <DatePicker Width="120"
+                        SelectedDate="{Binding ToDate, Mode=TwoWay}"
+                        Foreground="#374151" />
+          </StackPanel>
+
+        </Grid>
+      </Border>
+
+      <!-- Time Logs Grid -->
+      <dg:DataGrid ItemsSource="{Binding TimeLogs}"
+                   AutoGenerateColumns="False"
+                   GridLinesVisibility="None"
+                   HeadersVisibility="Column"
+                   RowBackground="#FFFFFF"
+                   MinHeight="400">
+
+        <dg:DataGrid.Styles>
+          <Style Selector="DataGridColumnHeader">
+            <Setter Property="Background" Value="#F3F4F6"/>
+            <Setter Property="Foreground" Value="#374151"/>
+          </Style>
+          <Style Selector="DataGridCell">
+            <Setter Property="Foreground" Value="#111827"/>
+          </Style>
+        </dg:DataGrid.Styles>
+
+        <dg:DataGrid.Columns>
+          <dg:DataGridTemplateColumn Header="User" Width="150">
+            <dg:DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                  <Ellipse Width="12" Height="12" Fill="#F472B6"/>
+                  <TextBlock Text="{Binding UserName}"
+                             FontWeight="SemiBold"
+                             Foreground="#111827"/>
+                </StackPanel>
+              </DataTemplate>
+            </dg:DataGridTemplateColumn.CellTemplate>
+          </dg:DataGridTemplateColumn>
+
+          <dg:DataGridTextColumn Header="Task"
+                                 Width="2*"
+                                 Binding="{Binding TaskName}" />
+          <dg:DataGridTextColumn Header="Project"
+                                 Width="2*"
+                                 Binding="{Binding ProjectName}" />
+          <dg:DataGridTextColumn Header="Date"
+                                 Width="120"
+                                 Binding="{Binding Date, StringFormat=d}" />
+          <dg:DataGridTextColumn Header="Time Spent"
+                                 Width="120"
+                                 Binding="{Binding TimeSpent, StringFormat='{}{0:%h}h {0:%m}min'}" />
+          <dg:DataGridTextColumn Header="Description"
+                                 Width="4*"
+                                 Binding="{Binding Description}" />
+        </dg:DataGrid.Columns>
+      </dg:DataGrid>
+
     </StackPanel>
   </DockPanel>
 </UserControl>
-

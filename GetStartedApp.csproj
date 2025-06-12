@@ -30,5 +30,8 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="MySql.EntityFrameworkCore" Version="9.0.3" />
+
+    <!-- Added for DataGrid support -->
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.2.7" />
   </ItemGroup>
 </Project>

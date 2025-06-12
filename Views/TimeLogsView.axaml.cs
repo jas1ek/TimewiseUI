@@ -1,11 +1,12 @@
 using Avalonia.Controls;
 
-namespace GetStartedApp.Views;
-
-public partial class TimeLogsView : UserControl
+namespace GetStartedApp.Views
 {
-    public TimeLogsView()
+    public partial class TimeLogsView : UserControl
     {
-        InitializeComponent();
+        public TimeLogsView()
+        {
+            InitializeComponent();
+        }
     }
 }
