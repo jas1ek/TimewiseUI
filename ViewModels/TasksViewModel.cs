@@ -56,6 +56,7 @@ namespace GetStartedApp.ViewModels
                 Deadline    = "16/05/25",
                 AssignedTo  = "Jane"
             });
+            
 
             // commands
             AddTimeCommand     = new RelayCommand<TaskItem?>(AddTime);

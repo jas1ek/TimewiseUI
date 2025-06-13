@@ -32,6 +32,71 @@ namespace GetStartedApp.ViewModels
                 Description = "Test and deploy Beta.",
                 AssignedUsers = new ObservableCollection<string> { "Charlie" }
             });
+            Projects.Add(new ProjectItem {
+                Name = "Project Alpha",
+                Description = "Build Alpha features.",
+                AssignedUsers = new ObservableCollection<string> { "Alice", "Bob" }
+            });
+            Projects.Add(new ProjectItem {
+                Name = "Project Beta",
+                Description = "Test and deploy Beta.",
+                AssignedUsers = new ObservableCollection<string> { "Charlie" }
+            });Projects.Add(new ProjectItem {
+                Name = "Project Alpha",
+                Description = "Build Alpha features.",
+                AssignedUsers = new ObservableCollection<string> { "Alice", "Bob" }
+            });
+            Projects.Add(new ProjectItem {
+                Name = "Project Beta",
+                Description = "Test and deploy Beta.",
+                AssignedUsers = new ObservableCollection<string> { "Charlie" }
+            });Projects.Add(new ProjectItem {
+                Name = "Project Alpha",
+                Description = "Build Alpha features.",
+                AssignedUsers = new ObservableCollection<string> { "Alice", "Bob" }
+            });
+            Projects.Add(new ProjectItem {
+                Name = "Project Beta",
+                Description = "Test and deploy Beta.",
+                AssignedUsers = new ObservableCollection<string> { "Charlie" }
+            });Projects.Add(new ProjectItem {
+                Name = "Project Alpha",
+                Description = "Build Alpha features.",
+                AssignedUsers = new ObservableCollection<string> { "Alice", "Bob" }
+            });
+            Projects.Add(new ProjectItem {
+                Name = "Project Beta",
+                Description = "Test and deploy Beta.",
+                AssignedUsers = new ObservableCollection<string> { "Charlie" }
+            });Projects.Add(new ProjectItem {
+                Name = "Project Alpha",
+                Description = "Build Alpha features.",
+                AssignedUsers = new ObservableCollection<string> { "Alice", "Bob" }
+            });
+            Projects.Add(new ProjectItem {
+                Name = "Project Beta",
+                Description = "Test and deploy Beta.",
+                AssignedUsers = new ObservableCollection<string> { "Charlie" }
+            });Projects.Add(new ProjectItem {
+                Name = "Project Alpha",
+                Description = "Build Alpha features.",
+                AssignedUsers = new ObservableCollection<string> { "Alice", "Bob" }
+            });
+            Projects.Add(new ProjectItem {
+                Name = "Project Beta",
+                Description = "Test and deploy Beta.",
+                AssignedUsers = new ObservableCollection<string> { "Charlie" }
+            });Projects.Add(new ProjectItem {
+                Name = "Project Alpha",
+                Description = "Build Alpha features.",
+                AssignedUsers = new ObservableCollection<string> { "Alice", "Bob" }
+            });
+            Projects.Add(new ProjectItem {
+                Name = "Project Beta",
+                Description = "Test and deploy Beta.",
+                AssignedUsers = new ObservableCollection<string> { "Charlie" }
+            });
+            
         }
 
         private void OpenCreateProject()

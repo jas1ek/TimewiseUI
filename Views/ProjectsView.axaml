@@ -8,46 +8,28 @@
   Background="#F9FAFB">
 
   <DockPanel>
-
     <!-- Sidebar -->
     <Border Background="#F1F1F1" Width="200" DockPanel.Dock="Left">
       <StackPanel Margin="20" Spacing="20">
-        <TextBlock Text="🕒 TimeWise"
-                   FontSize="22"
-                   FontWeight="Bold"
-                   Foreground="#1F2937"/>
-        <Button Content="🏠 Dashboard"
-                Background="Transparent"
-                Foreground="#1F2937"
-                Command="{Binding Main.ShowBoardCommand}"/>
-        <Button Content="📁 Projects"
-                Background="Transparent"
-                Foreground="#3B82F6"
-                Command="{Binding Main.ShowProjectsCommand}"/>
-        <Button Content="📝 Tasks"
-                Background="Transparent"
-                Foreground="#1F2937"
-                Command="{Binding Main.ShowTasksCommand}"/>
-        <Button Content="⏱ Time Logs"
-                Background="Transparent"
-                Foreground="#1F2937"
-                Command="{Binding Main.ShowTimeLogsCommand}"/>
-        <Button Content="📊 Reports"
-                Background="Transparent"
-                Foreground="#1F2937"
-                Command="{Binding Main.ShowReportsCommand}"/>
-        <Button Content="← Log Out"
-                Background="Transparent"
-                Foreground="#EF4444"
-                Margin="0,40,0,0"/>
+        <TextBlock Text="🕒 TimeWise" FontSize="22" FontWeight="Bold" Foreground="#1F2937"/>
+        <Button Content="🏠 Dashboard" Background="Transparent" Foreground="#1F2937" Command="{Binding Main.ShowBoardCommand}"/>
+        <Button Content="📁 Projects" Background="Transparent" Foreground="#3B82F6" Command="{Binding Main.ShowProjectsCommand}"/>
+        <Button Content="📝 Tasks" Background="Transparent" Foreground="#1F2937" Command="{Binding Main.ShowTasksCommand}"/>
+        <Button Content="⏱ Time Logs" Background="Transparent" Foreground="#1F2937" Command="{Binding Main.ShowTimeLogsCommand}"/>
+        <Button Content="📊 Reports" Background="Transparent" Foreground="#1F2937" Command="{Binding Main.ShowReportsCommand}"/>
+        <Button Content="← Log Out" Background="Transparent" Foreground="#EF4444" Margin="0,40,0,0"/>
       </StackPanel>
     </Border>
 
-    <!-- Main content -->
-    <StackPanel Margin="24" Spacing="16">
+    <!-- Main content: Grid fills all available space -->
+    <Grid Margin="24">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>   <!-- Header row -->
+        <RowDefinition Height="*"/>      <!-- Projects List row (fill all space) -->
+      </Grid.RowDefinitions>
 
       <!-- Header -->
-      <StackPanel Orientation="Horizontal" Spacing="16">
+      <StackPanel Orientation="Horizontal" Spacing="16" Grid.Row="0">
         <TextBlock Text="Projects"
                    FontSize="28"
                    FontWeight="Bold"
@@ -62,8 +44,8 @@
                 Command="{Binding OpenCreateProjectCommand}"/>
       </StackPanel>
 
-      <!-- Projects List -->
-      <ScrollViewer VerticalScrollBarVisibility="Auto">
+      <!-- Projects List with ScrollViewer that fills remaining space -->
+      <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
         <ItemsControl ItemsSource="{Binding Projects}">
           <ItemsControl.ItemTemplate>
             <DataTemplate x:DataType="models:ProjectItem">
@@ -74,24 +56,10 @@
                       BorderBrush="#E5E7EB"
                       BorderThickness="1">
                 <StackPanel Spacing="8">
-                  <!-- 1) Project Name -->
-                  <TextBlock Text="{Binding Name}"
-                             FontSize="16"
-                             FontWeight="Bold"
-                             Foreground="#111827"/>
-
-                  <!-- 2) Description -->
-                  <TextBlock Text="{Binding Description}"
-                             FontSize="13"
-                             Foreground="#374151"
-                             TextWrapping="Wrap"/>
-
-                  <!-- 3) Assigned Users -->
+                  <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="Bold" Foreground="#111827"/>
+                  <TextBlock Text="{Binding Description}" FontSize="13" Foreground="#374151" TextWrapping="Wrap"/>
                   <StackPanel Orientation="Horizontal" Spacing="6" Margin="0,8,0,0">
-                    <TextBlock Text="👥 Assigned:"
-                               FontWeight="Bold"
-                               FontSize="13"
-                               Foreground="#6B7280"/>
+                    <TextBlock Text="👥 Assigned:" FontWeight="Bold" FontSize="13" Foreground="#6B7280"/>
                     <ItemsControl ItemsSource="{Binding AssignedUsers}">
                       <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -100,12 +68,8 @@
                       </ItemsControl.ItemsPanel>
                       <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                          <Border Background="#E5E7EB"
-                                  CornerRadius="4"
-                                  Padding="4,2">
-                            <TextBlock Text="{Binding}"
-                                       FontSize="12"
-                                       Foreground="#374151"/>
+                          <Border Background="#E5E7EB" CornerRadius="4" Padding="4,2">
+                            <TextBlock Text="{Binding}" FontSize="12" Foreground="#374151"/>
                           </Border>
                         </DataTemplate>
                       </ItemsControl.ItemTemplate>
@@ -117,7 +81,6 @@
           </ItemsControl.ItemTemplate>
         </ItemsControl>
       </ScrollViewer>
-
-    </StackPanel>
+    </Grid>
   </DockPanel>
 </UserControl>
